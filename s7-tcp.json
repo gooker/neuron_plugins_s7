@@ -1,0 +1,138 @@
+{
+	"tag_regex": [
+		{
+			"type": 1,
+			"regex": "(^DB[0-9]+.DB(W|B)[0-9]+)$"
+		},
+		{
+			"type": 2,
+			"regex": "(^DB[0-9]+.DB(W|B)[0-9]+)$"
+		},
+		{
+			"type": 3,
+			"regex": "(^(I|O|F|T|C)[0-9]+|^DB[0-9]+.DBW[0-9]+)$"
+		},
+		{
+			"type": 4,
+			"regex": "(^(I|O|F|T|C)[0-9]+|^DB[0-9]+.DBW[0-9]+)$"
+		},
+		{
+			"type": 5,
+			"regex": "(^(I|O|F|T|C)[0-9]+|^DB[0-9]+.DB(W|D)[0-9]+)$"
+		},
+		{
+			"type": 6,
+			"regex": "(^(I|O|F|T|C)[0-9]+|^DB[0-9]+.DBW[0-9]+)$"
+		},
+		{
+			"type": 9,
+			"regex": "(^(I|O|F|T|C)[0-9]+|^DB[0-9]+.DBW[0-9]+)$"
+		},
+		{
+			"type": 10,
+			"regex": "(^(I|O|F|T|C)[0-9]+|^DB[0-9]+.DBW[0-9]+)$"
+		},
+		{
+			"type": 11,
+			"regex": "(^(I|O|F|T|C)[0-9]+|^DB[0-9]+.DB(W|X)[0-9]+)\\.([0-9]|1[0-5])$"
+		},
+		{
+			"type": 13,
+			"regex": "(^(I|O|F|T|C)[0-9]+|^DB[0-9]+.DBW[0-9]+)\\.[0-9]+$"
+		}
+	],
+	"group_interval": 100,
+	"host": {
+		"name": "PLC IP Address",
+		"name_zh": "PLC IP 地址",
+		"description": "Target PLC IPv4 address",
+		"description_zh": "目标设备 IPv4 地址",
+		"attribute": "required",
+		"type": "string",
+		"valid": {
+			"regex": "/^((2[0-4]\\d|25[0-5]|[01]?\\d\\d?)\\.){3}(2[0-4]\\d|25[0-5]|[01]?\\d\\d?)$/",
+			"length": 30
+		}
+	},
+	"port": {
+		"name": "PLC Port",
+		"name_zh": "PLC 端口",
+		"description": "Target PLC port",
+		"description_zh": "目标设备端口号",
+		"attribute": "required",
+		"type": "int",
+		"default": 102,
+		"valid": {
+			"min": 1,
+			"max": 65535
+		}
+	},
+	"pdu_size": {
+		"name": "PDU Size",
+		"name_zh": "PDU 大小",
+		"description": "PDU size",
+		"description_zh": "PDU 大小",
+		"attribute": "required",
+		"type": "int",
+		"default": 960,
+		"valid": {
+			"min": 100,
+			"max": 960
+		}
+	},
+	"module": {
+		"name": "PLC Module",
+		"name_zh": "PLC 型号",
+		"description": "Target PLC module",
+		"description_zh": "目标设备型号",
+		"attribute": "required",
+		"type": "map",
+		"default": 0,
+		"valid": {
+			"map": [
+				{
+					"key": "S7-1200/1500",
+					"value": 0
+				},
+				{
+					"key": "S7-200",
+					"value": 1
+				}
+			]
+		}
+	},
+	"rack": {
+		"name": "CPU Rack",
+		"name_zh": "CPU 机架号(rack)",
+		"description": "PLC CPU rack number",
+		"description_zh": "PLC CPU 机架号",
+		"attribute": "required",
+		"type": "int",
+		"default": 0,
+		"valid": {
+			"min": 0,
+			"max": 15
+		},
+		"condition": {
+			"field": "module",
+			"value": 0
+		}
+	},
+	"slot": {
+		"name": "CPU Slot",
+		"name_zh": "CPU 槽号(slot)",
+		"description": "PLC CPU slot",
+		"description_zh": "PLC CPU 槽号",
+		"attribute": "required",
+		"type": "int",
+		"default": 1,
+		"valid": {
+			"min": 0,
+			"max": 15
+		},
+		"condition": {
+			"field": "module",
+			"value": 0
+		}
+	}
+}
